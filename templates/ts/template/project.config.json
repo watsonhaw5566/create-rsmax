@@ -1,0 +1,41 @@
+<% if (platform=='wechat') { -%>
+{
+"miniprogramRoot": "dist/<% if (one) { %>wechat<% } %>",
+"setting": {
+"urlCheck": false,
+"es6": false,
+"postcss": true,
+"minified": true,
+"newFeature": true,
+"coverView": true,
+"autoAudits": false,
+"uglifyFileName": false,
+"checkInvalidKey": true,
+"checkSiteMap": true,
+"uploadWithSourceMap": true,
+"babelSetting": {
+"ignore": [],
+"disablePlugins": [],
+"outputPath": ""
+},
+"bundle": false
+},
+"compileType": "miniprogram",
+"simulatorType": "wechat",
+"simulatorPluginLibVersion": {},
+"condition": {}
+}
+<% } else { -%>
+{
+"miniprogramRoot": "dist/<% if (one) { %>toutiao<% } %>",
+"setting": {
+"urlCheck": true,
+"es6": false,
+"postcss": true,
+"minified": true,
+"newFeature": true
+},
+"appid": "testAppId",
+"projectname": "Remax toutiao Template"
+}
+<% } -%>
