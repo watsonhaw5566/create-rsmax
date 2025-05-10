@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 import semver from 'semver';
-import {logger} from "rslog";
+import { logger } from 'rslog';
 
 export function getLocalVersion(): string {
   const packagePath = require.resolve('../package.json');
