@@ -9,8 +9,7 @@
     "build": "rslib build",
     "dev": "rslib build --watch",
     "format": "prettier --write .",
-    "test": "vitest run",
-    "start": "node ./bin/create-remax-app"
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
