@@ -25,9 +25,23 @@
   "simulatorPluginLibVersion": {},
   "condition": {}
 }
+<% } else if(platform=='toutiao') { -%>
+{
+"miniprogramRoot": "dist/<% if (one) { %>toutiao<% } %>",
+"setting": {
+"urlCheck": true,
+"es6": false,
+"postcss": true,
+"minified": true,
+"newFeature": true
+},
+"appid": "testAppId",
+"projectname": "Remax toutiao Template"
+}
+<% } -%>
 <% } else { -%>
 {
-  "miniprogramRoot": "dist/<% if (one) { %>toutiao<% } %>",
+  "miniprogramRoot": "dist/<% if (one) { %>xhs<% } %>",
   "setting": {
   "urlCheck": true,
   "es6": false,
@@ -36,6 +50,6 @@
   "newFeature": true
   },
   "appid": "testAppId",
-  "projectname": "Remax toutiao Template"
+  "projectname": "Remax xhs Template"
 }
 <% } -%>
