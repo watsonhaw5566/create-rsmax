@@ -10,7 +10,8 @@
     "dev": "rslib build --watch",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test-build": "node ./bin/create-remax-app demo xhs"
+    "test-build": "node ./bin/create-remax-app demo xhs",
+    "prepare": "npm run build && simple-git-hooks"
   },
   "repository": {
     "type": "git",
