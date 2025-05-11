@@ -2,12 +2,15 @@
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
-    "lib": ["ES2021"],
-    "target": "ES2021",
+    "lib": ["ES2019"],
+    "target": "ES2019",
     "strict": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "outDir": "lib"
   },
-  "exclude": ["templates"]
+  "include": ["src/**/*", "@types/**/*"],
+  "exclude": ["src/__tests__"]
 }

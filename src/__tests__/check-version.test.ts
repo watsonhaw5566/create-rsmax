@@ -1,6 +1,5 @@
-import { getLocalVersion, generatorSymbol } from '../src/check-version';
-// @ts-expect-error
-import { version } from '../package.json';
+import { getLocalVersion, generatorSymbol } from '../check-version';
+import { version } from '../../package.json';
 
 describe('Check Version', () => {
   it(`local version should be ${version}`, () => {
