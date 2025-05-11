@@ -1,4 +1,4 @@
-# Create Remax3 App
+# Create Remax App
 
 ## 快速开始
 

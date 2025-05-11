@@ -1,4 +1,4 @@
-# create-remax3-app 模板使用说明
+# create-remax-app 模板使用说明
 
 ## 参数 `-t`
 
@@ -11,10 +11,9 @@
 根据平台生成文件，共有如下平台：
 
 * one
-* ali
 * wechat
+* ali
 * toutiao
-* xhs
 
 ### one 跨平台
 
@@ -38,9 +37,3 @@
 
 * ~~mini.project.json~~
 * ~~project.config.json~~
-
-### xhs 小红书
-
-移除以下文件
-
-* ~~mini.project.json~~
