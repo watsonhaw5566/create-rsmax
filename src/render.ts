@@ -1,6 +1,6 @@
 import fs from 'fs';
 import Metalsmith from 'metalsmith';
-import {logger} from "rslog";
+import chalk from 'chalk';
 import ejs from 'ejs';
 import async from 'async';
 import path from 'path';
@@ -36,7 +36,7 @@ export default async ({ projectDirectory, t }: ArgvType) => {
   const destPath = path.join(process.cwd(), projectDirectory);
 
   if (fs.existsSync(destPath)) {
-    console.log(logger.error('此项目已存在，请变更名字后重试'));
+    console.log(chalk.red('此项目已存在，请变更名字后重试'));
     return;
   }
 
@@ -82,33 +82,33 @@ export default async ({ projectDirectory, t }: ArgvType) => {
     .use(generatorOutputInfo())
     .build((err: Error) => {
       if (!err) {
-        const cd = logger.info(` cd ${projectDirectory} && npm i`);
-        const platformList = logger.warn('ali, wechat, toutiao, web,xhs');
+        const cd = chalk.cyan(` cd ${projectDirectory} && npm i`);
+        const platformList = chalk.yellow('ali, wechat, toutiao, web');
         const oneCommandArray = [
           {
-            command: logger.info('npm run dev <platform>'),
+            command: chalk.cyan('npm run dev <platform>'),
             description: `根据传入平台进行调试，支持参数为: ${platformList}`,
           },
           {
-            command: logger.info('npm run dev ali'),
+            command: chalk.cyan('npm run dev ali'),
             description: '调试阿里小程序',
           },
           {
-            command: logger.info('npm run build <platform>'),
+            command: chalk.cyan('npm run build <platform>'),
             description: `根据传入平台构建小程序，支持参数为: ${platformList}`,
           },
           {
-            command: logger.info('npm run build ali'),
+            command: chalk.cyan('npm run build ali'),
             description: '构建阿里小程序',
           },
         ];
         const otherCommandArray = [
           {
-            command: logger.info('npm run dev'),
+            command: chalk.cyan('npm run dev'),
             description: `调试${currentPlatformName}`,
           },
           {
-            command: logger.info('npm run build'),
+            command: chalk.cyan('npm run build'),
             description: `构建${currentPlatformName}`,
           },
         ];
@@ -118,12 +118,12 @@ export default async ({ projectDirectory, t }: ArgvType) => {
         const newOtherCommandArray = otherCommandArray.map((item) => {
           return ` ${item.command} \t\n\t\n  ${item.description}`;
         });
-        const oneCommandInfo = `\t\n你可以进入 ${logger.info(projectDirectory)} 执行以下命令: \t\n\t\n${cd}\t\n\t\n  进入项目目录并安装依赖\t\n\t\n${newCommandArray.join('\t\n\t\n')}`;
-        const otherCommandInfo = `\t\n你可以进入 ${logger.info(projectDirectory)} 执行以下命令: \t\n\t\n${cd}\t\n\t\n  进入项目目录并安装依赖\t\n\t\n${newOtherCommandArray.join('\t\n\t\n')}`;
+        const oneCommandInfo = `\t\n你可以进入 ${chalk.cyanBright(projectDirectory)} 执行以下命令: \t\n\t\n${cd}\t\n\t\n  进入项目目录并安装依赖\t\n\t\n${newCommandArray.join('\t\n\t\n')}`;
+        const otherCommandInfo = `\t\n你可以进入 ${chalk.cyanBright(projectDirectory)} 执行以下命令: \t\n\t\n${cd}\t\n\t\n  进入项目目录并安装依赖\t\n\t\n${newOtherCommandArray.join('\t\n\t\n')}`;
         const currentCommandInfo =
           currentPlatform === 'one' ? oneCommandInfo : otherCommandInfo;
         console.log('\t');
-        console.log(`创建 ${logger.info(currentPlatformName)} 成功！`);
+        console.log(`创建 ${chalk.cyan(currentPlatformName)} 成功！`);
         console.log(currentCommandInfo);
         console.log('\t\n欲了解更多请查阅官方文档：https://remaxjs.org');
       }

@@ -1,5 +1,5 @@
 import cli from 'yargs';
-import { logger } from 'rslog';
+import {logger} from "rslog";
 import { checkCurrentRepoVersion } from './check-version';
 import render, { ArgvType } from './render';
 
