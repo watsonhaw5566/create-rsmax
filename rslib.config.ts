@@ -4,8 +4,9 @@ export default defineConfig({
   lib: [
     {
       format: 'cjs',
-      syntax: 'es2021',
+      syntax: 'es2019',
       output: {
+        target: 'node',
         distPath: {
           root: './lib',
         },
