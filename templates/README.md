@@ -37,3 +37,10 @@
 
 * ~~mini.project.json~~
 * ~~project.config.json~~
+
+
+### xhs 小红书
+
+移除以下文件
+
+* ~~mini.project.json~~

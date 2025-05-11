@@ -83,7 +83,7 @@ export default async ({ projectDirectory, t }: ArgvType) => {
     .build((err: Error) => {
       if (!err) {
         const cd = chalk.cyan(` cd ${projectDirectory} && npm i`);
-        const platformList = chalk.yellow('ali, wechat, toutiao, web');
+        const platformList = chalk.yellow('ali, wechat, toutiao, xhs, web');
         const oneCommandArray = [
           {
             command: chalk.cyan('npm run dev <platform>'),
