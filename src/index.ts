@@ -1,5 +1,5 @@
 import cli from 'yargs';
-import {logger} from "rslog";
+import chalk from 'chalk';
 import { checkCurrentRepoVersion } from './check-version';
 import render, { ArgvType } from './render';
 
@@ -39,20 +39,20 @@ export function run(args: string[]) {
       console.error('Please specify the project directory:');
       console.error(
         '  ',
-        logger.info(scriptName),
-        logger.success(`<${placeholder}>`),
+        chalk.blue(scriptName),
+        chalk.green(`<${placeholder}>`),
       );
       console.error('\t');
       console.error('For example:');
       console.error(
         '  ',
-        logger.info(scriptName),
-        logger.success('first-remax-app'),
+        chalk.blue(scriptName),
+        chalk.green('first-remax-app'),
       );
       console.error('\t');
       console.error(
         'Run',
-        logger.info(`${scriptName} --help`),
+        chalk.blue(`${scriptName} --help`),
         'to see all options.',
       );
       process.exit(1);
@@ -67,5 +67,5 @@ function create(argv: ArgvType) {
     } catch {}
   }
 
-  render(argv).then();
+  render(argv);
 }

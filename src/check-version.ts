@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 import semver from 'semver';
-import {logger} from "rslog";
+import chalk from 'chalk';
 
 export function getLocalVersion(): string {
   const packagePath = require.resolve('../package.json');
@@ -47,8 +47,8 @@ export function checkCurrentRepoVersion(repoName: string) {
 
   const placeholder = `*${generatorSymbol(53, ' ')}*`;
   const origin = `*${generatorSymbol(63, ' ')}*`;
-  const latest = 'latest:    ' + logger.success(latestVersion);
-  const installed = 'installed: ' + logger.info(localVersion);
+  const latest = 'latest:    ' + chalk.green(latestVersion);
+  const installed = 'installed: ' + chalk.red(localVersion);
   const longLength =
     latest.length > installed.length ? latest.length : installed.length;
 
@@ -56,7 +56,7 @@ export function checkCurrentRepoVersion(repoName: string) {
   console.log(placeholder);
   console.log(
     '*',
-    logger.warn(` A newer version of ${repoName} is available. `),
+    chalk.yellow(` A newer version of ${repoName} is available. `),
     '*',
   );
   console.log(placeholder);
