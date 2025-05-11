@@ -1,4 +1,4 @@
-<% if (platform=='wechat') { -%>
+<% if (platform === 'wechat') { -%>
 {
 "miniprogramRoot": "dist/<% if (one) { %>wechat<% } %>",
 "setting": {
@@ -25,7 +25,7 @@
 "simulatorPluginLibVersion": {},
 "condition": {}
 }
-<% } else if(platform=='toutiao') { -%>
+<% } else if(platform === 'toutiao') { -%>
 {
 "miniprogramRoot": "dist/<% if (one) { %>toutiao<% } %>",
 "setting": {
@@ -38,7 +38,6 @@
 "appid": "testAppId",
 "projectname": "Remax toutiao Template"
 }
-<% } -%>
 <% } else { -%>
 {
 "miniprogramRoot": "dist/<% if (one) { %>xhs<% } %>",
