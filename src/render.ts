@@ -158,7 +158,7 @@ const filterPlatform = () => {
 
 const removeFile = () => {
   const filesToRemove: Record<string, string[]> = {
-    'mini.project.json': ['wechat', 'toutiao'],
+    'mini.project.json': ['wechat', 'toutiao','xhs'],
     'project.config.json': ['ali'],
   };
 
