@@ -4,7 +4,7 @@ const pages = ['pages/index/index'];
 module.exports.ali = {
   pages,
   window: {
-    defaultTitle: 'Remax Ali Template',
+    defaultTitle: 'Rsmax Ali Template',
     titleBarColor: '#282c34',
   },
 };
@@ -12,7 +12,7 @@ module.exports.ali = {
 module.exports.wechat = {
   pages,
   window: {
-    navigationBarTitleText: 'Remax Wechat Template',
+    navigationBarTitleText: 'Rsmax Wechat Template',
     navigationBarBackgroundColor: '#282c34',
   },
 };
@@ -20,20 +20,28 @@ module.exports.wechat = {
 module.exports.toutiao = {
   pages,
   window: {
-    navigationBarTitleText: 'Remax Toutiao Template',
+    navigationBarTitleText: 'Rsmax Toutiao Template',
     navigationBarBackgroundColor: '#282c34',
   },
 };
 
+  module.exports.xhs = {
+    pages,
+    window: {
+      navigationBarTitleText: 'Rsmax Xhs Template',
+      navigationBarBackgroundColor: '#282c34',
+    },
+  };
+
 module.exports.web = {
   pages,
-  title: 'Remax Web Template',
+  title: 'Rsmax Web Template',
 };
 <% } else { %>
 module.exports = {
   pages: ['pages/index/index'],
   window: {
-    navigationBarTitleText: 'Remax <%= platformTitle %> Template',
+    navigationBarTitleText: 'Rsmax <%= platformTitle %> Template',
     navigationBarBackgroundColor: '#282c34'
   }
 };

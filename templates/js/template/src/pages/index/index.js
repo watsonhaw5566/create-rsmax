@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'remax/<%= platform %>';
+import { View, Text, Image } from 'rsmax/<%= platform %>';
 import styles from './index.css';
 
 export default () => {

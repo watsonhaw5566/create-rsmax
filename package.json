@@ -1,16 +1,16 @@
 {
-  "name": "create-remax3-app",
-  "version": "1.0.7",
-  "description": "Create Remax apps with no build configuration.",
+  "name": "create-rsmax",
+  "version": "1.0.0",
+  "description": "Create Rsmax apps with no build configuration.",
   "bin": {
-    "create-remax-app": "./bin/create-remax-app"
+    "create-rsmax": "./bin/create-rsmax"
   },
   "scripts": {
     "build": "rslib build",
     "dev": "rslib build --watch",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test-build": "node ./bin/create-remax-app demo xhs",
+    "test-build": "node ./bin/create-rsmax demo xhs",
     "prepare": "npm run build && simple-git-hooks"
   },
   "repository": {
@@ -18,7 +18,7 @@
     "url": "git+https://github.com/remaxjs/create-remax-app.git"
   },
   "keywords": [
-    "Remax",
+    "Rsmax",
     "React",
     "CLI"
   ],

@@ -36,7 +36,7 @@
 "newFeature": true
 },
 "appid": "testAppId",
-"projectname": "Remax toutiao Template"
+"projectname": "Rsmax toutiao Template"
 }
 <% } else { -%>
 {
@@ -49,6 +49,6 @@
   "newFeature": true
   },
   "appid": "testAppId",
-  "projectname": "Remax xhs Template"
+  "projectname": "Rsmax xhs Template"
 }
 <% } -%>

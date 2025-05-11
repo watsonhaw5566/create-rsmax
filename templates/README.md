@@ -1,4 +1,4 @@
-# create-remax-app 模板使用说明
+# create-rsmax 模板使用说明
 
 ## 参数 `-t`
 

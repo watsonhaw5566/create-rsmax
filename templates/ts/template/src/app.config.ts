@@ -2,23 +2,23 @@
 const pages = ['pages/index/index'];
 const color = '#282c34';
 
-import { AppConfig as WechatAppConfig } from 'remax/wechat';
-import { AppConfig as AliAppConfig } from 'remax/ali';
-import { AppConfig as ToutiaoAppConfig } from 'remax/toutiao';
-import { AppConfig as WebAppConfig } from 'remax/web';
+import { AppConfig as WechatAppConfig } from 'rsmax/wechat';
+import { AppConfig as AliAppConfig } from 'rsmax/ali';
+import { AppConfig as ToutiaoAppConfig } from 'rsmax/toutiao';
+import { AppConfig as WebAppConfig } from 'rsmax/web';
 
 export const wechat: WechatAppConfig = {
   pages,
   window: {
     navigationBarBackgroundColor: color,
-    navigationBarTitleText: 'Remax One Wechat',
+    navigationBarTitleText: 'Rsmax One Wechat',
   },
 };
 
 export const ali: AliAppConfig = {
   pages,
   window: {
-    defaultTitle: 'Remax One Ali',
+    defaultTitle: 'Rsmax One Ali',
     titleBarColor: color,
   },
 };
@@ -26,22 +26,22 @@ export const ali: AliAppConfig = {
 export const toutiao: ToutiaoAppConfig = {
   pages,
   window: {
-    navigationBarTitleText: 'Remax One Toutiao',
+    navigationBarTitleText: 'Rsmax One Toutiao',
     navigationBarBackgroundColor: color,
   },
 };
 
 export const web: WebAppConfig = {
   pages,
-  title: 'Remax One Web',
+  title: 'Rsmax One Web',
 };
 <% } else { -%>
-import { AppConfig } from "remax/<%= platform %>";
+import { AppConfig } from "rsmax/<%= platform %>";
 
 const config: AppConfig = {
   pages: ['pages/index/index'],
   window: {
-    navigationBarTitleText: 'Remax <%= platformTitle %> Template With TypeScript',
+    navigationBarTitleText: 'Rsmax <%= platformTitle %> Template With TypeScript',
     navigationBarBackgroundColor: '#282c34'
   }
 };

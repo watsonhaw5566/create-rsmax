@@ -1,12 +1,12 @@
 # remax-template
 
-> This template was created for building a Remax project.
+> This template was created for building a Rsmax project.
 
 Usage
 
-This is a project template for `create-remax-app`.
+This is a project template for `create-rsmax`.
 
 ```bash
-$ npx create-remax-app first-remax-app -p wechat
-$ cd first-remax-app && npm run dev
+$ npx create-rsmax first-rsmax-app -p wechat
+$ cd first-rsmax-app && npm run dev
 ```

@@ -11,7 +11,7 @@ export function run(args: string[]) {
     .scriptName(scriptName)
     .usage<any>(
       `$0 <${placeholder}> [options]`,
-      '创建 remax 项目',
+      '创建 rsmax 项目',
       (yargs) => {
         return yargs.positional(placeholder, {
           describe: '项目目录',
@@ -25,7 +25,7 @@ export function run(args: string[]) {
     .option('t', {
       alias: 'typescript',
       default: false,
-      describe: 'create remax typescript app',
+      describe: 'create rsmax typescript app',
       type: 'boolean',
     })
     .option('c', {
@@ -47,7 +47,7 @@ export function run(args: string[]) {
       console.error(
         '  ',
         chalk.blue(scriptName),
-        chalk.green('first-remax-app'),
+        chalk.green('first-rsmax-app'),
       );
       console.error('\t');
       console.error(

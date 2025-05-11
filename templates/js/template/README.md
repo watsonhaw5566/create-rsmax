@@ -1,13 +1,15 @@
-# Remax <%= platformTitle %>
+# Rsmax <%= platformTitle %>
 
 <% if (one) { -%>
-使用 Remax 开发跨平台小程序。
+使用 Rsmax 开发跨平台小程序。
 <% } else if (wechat) { -%>
-使用 Remax 开发微信小程序。
+使用 Rsmax 开发微信小程序。
 <% } else if (toutiao) { -%>
-使用 Remax 开发头条小程序。
+使用 Rsmax 开发头条小程序。
 <% } else if (ali) { -%>
-使用 Remax 开发阿里小程序。
+使用 Rsmax 开发阿里小程序。
+<% } else if (xhs) { -%>
+使用 Rsmax 开发小红书小程序。
 <% } -%>
 
 ## Getting Start

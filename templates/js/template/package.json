@@ -9,11 +9,11 @@
   "license": "MIT",
   "scripts": {
 <% if (one) { -%>
-    "dev": "remax build -w -t",
-    "build": "cross-env NODE_ENV=production remax build -t"
+    "dev": "rsmax build -w -t",
+    "build": "cross-env NODE_ENV=production rsmax build -t"
 <% } else { -%>
-    "dev": "remax build -t <%= platform %> -w",
-    "build": "cross-env NODE_ENV=production remax build -t <%= platform %>"
+    "dev": "rsmax build -t <%= platform %> -w",
+    "build": "cross-env NODE_ENV=production rsmax build -t <%= platform %>"
 <% } -%>
   },
   "dependencies": {
@@ -21,7 +21,7 @@
 <% if (one) { -%>
     "react-dom": "^18.3",
 <% } -%>
-    "remax": "^3.9.0"
+    "rsmax": "^1.0.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.2"
