@@ -1,6 +1,6 @@
 {
   "name": "create-rsmax",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Create Rsmax apps with no build configuration.",
   "bin": {
     "create-rsmax": "./bin/create-rsmax"
