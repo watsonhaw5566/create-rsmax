@@ -15,15 +15,15 @@ jobs:
       matrix:
         node-version: [20]
     steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - name: Install dependencies
+          node-version: '14'
+      - name: Install pnpm
+        run: npm install -g pnpm
+        shell: bash
+
+      - name: Install project dependencies
         run: pnpm install
