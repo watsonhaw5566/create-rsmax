@@ -13,15 +13,20 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [ 18, 20]
+        node-version: [18,20]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Node.js
+      - uses: actions/checkout@v4
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: 使用 Nnode.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
-      - name: Install pnpm
-        run: npm install -g pnpm
-        shell: bash
-
-      - name: Install project dependencies
-        run: pnpm install
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: 安装依赖
+        run: |
+          pnpm install
+          pnpm build
+          pnpm test
