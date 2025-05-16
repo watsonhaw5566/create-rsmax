@@ -1,4 +1,5 @@
 # Create Rsmax App
+
 <p>
   <a href="https://npmjs.com/package/create-rsmax">
    <img src="https://img.shields.io/npm/v/create-rsmax?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" />

@@ -28,14 +28,14 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/remaxjs/create-remax-app/issues"
+    "url": "https://github.com/watsonhaw5566/create-rsmax/issues"
   },
   "files": [
     "lib",
     "bin",
     "templates"
   ],
-  "homepage": "https://github.com/remaxjs/create-remax-app#readme",
+  "homepage": "https://github.com/watsonhaw5566/create-rsmax#readme",
   "dependencies": {
     "async": "^3.1.0",
     "chalk": "^4.1.0",
