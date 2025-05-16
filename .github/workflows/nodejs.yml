@@ -10,24 +10,24 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
-
+        node-version: [ 18,20 ]
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: 使用 Nnode.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install Pnpm
-        run: |
-          npm install -g corepack@latest --force
-          corepack enable
-      - name: install, build, and test
+          cache: 'pnpm'
+      - name: 安装、构建、测试
         run: |
           pnpm install
           pnpm build
           pnpm test
+
