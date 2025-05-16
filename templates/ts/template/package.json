@@ -10,10 +10,12 @@
   "scripts": {
 <% if (one) { -%>
     "dev": "rsmax build -w -t",
-    "build": "cross-env NODE_ENV=production rsmax build -t"
+    "build": "cross-env NODE_ENV=production rsmax build -t",
+    "analyze": "rsmax build -t -a"
 <% } else { -%>
     "dev": "rsmax build -t <%= platform %> -w",
-    "build": "cross-env NODE_ENV=production rsmax build -t <%= platform %>"
+    "build": "cross-env NODE_ENV=production rsmax build -t <%= platform %>",
+    "analyze": "rsmax build -t <%= platform %> -a"
 <% } -%>
   },
   "dependencies": {
