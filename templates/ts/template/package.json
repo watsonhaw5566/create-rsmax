@@ -23,7 +23,7 @@
 <% if (one) { -%>
     "react-dom": "^18.3",
 <% } -%>
-    "rsmax": "^1.1.0"
+    "rsmax": "^1.3.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
