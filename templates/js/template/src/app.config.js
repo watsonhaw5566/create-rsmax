@@ -25,17 +25,11 @@ module.exports.toutiao = {
   },
 };
 
-  module.exports.xhs = {
-    pages,
-    window: {
-      navigationBarTitleText: 'Rsmax Xhs Template',
-      navigationBarBackgroundColor: '#282c34',
-    },
-  };
-
 module.exports.web = {
   pages,
-  title: 'Rsmax Web Template',
+  window: {
+    defaultTitle: 'Rsmax Web Template',
+  },
 };
 <% } else { %>
 module.exports = {

@@ -33,7 +33,9 @@ export const toutiao: ToutiaoAppConfig = {
 
 export const web: WebAppConfig = {
   pages,
-  title: 'Rsmax One Web',
+  window: {
+    defaultTitle: 'Rsmax One Web',
+  },
 };
 <% } else { -%>
 import { AppConfig } from "rsmax/<%= platform %>";
