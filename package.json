@@ -10,7 +10,7 @@
     "dev": "rslib build --watch",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test-build": "node ./bin/create-rsmax demo xhs",
+    "test-build": "node ./bin/create-rsmax demo ali",
     "prepare": "npm run build && simple-git-hooks"
   },
   "repository": {
@@ -18,6 +18,7 @@
     "url": "git+https://github.com/remaxjs/create-remax-app.git"
   },
   "keywords": [
+    "Remax",
     "Rsmax",
     "React",
     "CLI"
