@@ -11,6 +11,6 @@
     "moduleResolution": "node",
     "outDir": "lib"
   },
-  "include": ["src/**/*", "@types/**/*"],
+  "include": ["src/**/*", "typing"],
   "exclude": ["src/__tests__"]
 }
