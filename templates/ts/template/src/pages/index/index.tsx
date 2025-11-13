@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'rsmax/<%= platform %>';
+import { View, Text, Image } from '@rsmax/<%= platform %>/component';
 import styles from './index.css';
 
 export default () => {
