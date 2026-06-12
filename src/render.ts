@@ -2,7 +2,6 @@ import fs from 'fs';
 import Metalsmith from 'metalsmith';
 import chalk from 'chalk';
 import ejs from 'ejs';
-import async from 'async';
 import path from 'path';
 import type { Arguments } from 'yargs';
 import prompts, { PromptObject } from 'prompts';
@@ -191,24 +190,19 @@ const renderTemplateFiles = () => {
   return (files: any, metalsmith: any, done: () => void) => {
     const keys = Object.keys(files);
     const metalsmithMetadata = metalsmith.metadata();
-    async.each(
-      keys,
-      (file, next) => {
+    Promise.all(
+      keys.map((file) => {
         const str = files[file].contents.toString();
-
         try {
           const res = ejs.render(str, metalsmithMetadata);
           files[file].contents = Buffer.from(res, 'utf-8');
         } catch (err) {
-          // @ts-ignore
-          err.message = `[${file}] ${err.message}`;
-          // @ts-ignore
-          return next(err);
+          (err as Error).message = `[${file}] ${(err as Error).message}`;
+          throw err;
         }
-
-        next();
-      },
-      done,
-    );
+      }),
+    )
+      .then(() => done())
+      .catch(done);
   };
 };
