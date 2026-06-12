@@ -124,7 +124,9 @@ export default async ({ projectDirectory, t }: ArgvType) => {
         console.log('\t');
         console.log(`创建 ${chalk.cyan(currentPlatformName)} 成功！`);
         console.log(currentCommandInfo);
-        console.log('\t\n欲了解更多请查阅官方文档：https://remaxjs.org');
+        console.log(
+          '\t\n欲了解更多请查阅官方文档：https://remaxjs.wdchiphop.cn/',
+        );
       }
     });
 };
