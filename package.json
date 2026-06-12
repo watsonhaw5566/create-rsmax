@@ -53,7 +53,7 @@
     "@types/ejs": "^3.0.5",
     "@types/jest": "^26.0.16",
     "@types/micromatch": "^4.0.5",
-    "@types/node": "^18",
+    "@types/node": "^20",
     "@types/prompts": "^2.0.9",
     "@types/yargs": "^15.0.11",
     "prettier": "^3.5.3",
@@ -65,6 +65,6 @@
     "pre-commit": "npm run format && npm run test && npm run build"
   },
   "engines": {
-    "node": ">= 18.0.0"
+    "node": ">= 20.19"
   }
 }
