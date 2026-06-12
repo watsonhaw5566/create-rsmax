@@ -49,10 +49,7 @@
   "devDependencies": {
     "@rslib/core": "^0.6.9",
     "@types/async": "^3.2.5",
-    "@types/debug": "^4.1.12",
     "@types/ejs": "^3.0.5",
-    "@types/jest": "^26.0.16",
-    "@types/micromatch": "^4.0.5",
     "@types/node": "^20",
     "@types/prompts": "^2.0.9",
     "@types/yargs": "^15.0.11",
