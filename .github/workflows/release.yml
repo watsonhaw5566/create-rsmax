@@ -2,8 +2,7 @@ name: Publish to NPM
 
 on:
   push:
-    tags:
-      - '*'
+    tags: ['v*']
 
 jobs:
   publish:
