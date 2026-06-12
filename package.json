@@ -11,7 +11,7 @@
     "format": "prettier --write .",
     "test": "rstest run",
     "test-build": "node ./bin/create-rsmax demo ali",
-    "prepare": "npm run build && simple-git-hooks"
+    "prepare": "pnpm run build && simple-git-hooks"
   },
   "repository": {
     "type": "git",
