@@ -1,4 +1,4 @@
-# remax-template
+# rsmax-template
 
 > This template was created for building a Rsmax project.
 
