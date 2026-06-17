@@ -12,7 +12,8 @@
     "test": "rstest run",
     "test-build-js": "node ./bin/create-rsmax demo ali",
     "test-build-ts": "node ./bin/create-rsmax demo -t",
-    "prepare": "pnpm run build && simple-git-hooks"
+    "prepare": "pnpm run build && simple-git-hooks",
+    "release": "pnpm run prepare && pnpm run publish"
   },
   "repository": {
     "type": "git",
