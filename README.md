@@ -22,7 +22,7 @@ cd first-rsmax-app && npm i
 
 ```sh
 npx create-rsmax first-rsmax-app
-cd first-rsmax-app && yarn i
+cd first-rsmax-app && yarn
 ```
 
 ### 使用 pnpm
