@@ -10,7 +10,8 @@
     "dev": "rslib build --watch",
     "format": "prettier --write .",
     "test": "rstest run",
-    "test-build": "node ./bin/create-rsmax demo ali",
+    "test-build-js": "node ./bin/create-rsmax demo ali",
+    "test-build-ts": "node ./bin/create-rsmax demo -t",
     "prepare": "pnpm run build && simple-git-hooks"
   },
   "repository": {
