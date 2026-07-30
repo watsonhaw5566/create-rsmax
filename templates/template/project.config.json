@@ -1,0 +1,19 @@
+{
+  "miniprogramRoot": "dist/",
+  "setting": {
+    "urlCheck": false,
+    "es6": false,
+    "postcss": false,
+    "minified": false,
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./dist/"
+      }
+    ]
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.8.10",
+  "srcMiniprogramRoot": "dist/"
+}

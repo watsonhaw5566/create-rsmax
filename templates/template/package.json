@@ -1,0 +1,18 @@
+{
+  "name": "<%= name %>",
+  "private": true,
+  "version": "1.0.0",
+  "description": "<%- description %>",
+  "main": "index.js",
+  "keywords": [],
+  "author": "<%- author %>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "rsmax dev src -o dist",
+    "build": "rsmax build src -o dist",
+    "clean": "rsmax clean dist"
+  },
+  "dependencies": {
+    "rsmax": "^2.0.0"
+  }
+}
