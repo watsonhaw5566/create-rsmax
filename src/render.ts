@@ -3,35 +3,17 @@ import Metalsmith from 'metalsmith';
 import chalk from 'chalk';
 import ejs from 'ejs';
 import path from 'path';
-import type { Arguments } from 'yargs';
 import prompts, { PromptObject } from 'prompts';
 import user from './git-user';
 import * as Config from './config';
 
-export interface ArgvType extends Arguments {
-  t: boolean;
+export interface ArgvType {
   projectDirectory: string;
+  check: boolean;
 }
 
-let currentPlatformName = '';
-let currentPlatform = '';
-
-function getConfig(isTS: boolean) {
-  if (isTS) {
-    return {
-      description: Config.descriptionTS,
-      templatePath: path.join(Config.templatesPath, 'ts', Config.templateDir),
-    };
-  }
-
-  return {
-    description: Config.description,
-    templatePath: path.join(Config.templatesPath, 'js', Config.templateDir),
-  };
-}
-
-export default async ({ projectDirectory, t }: ArgvType) => {
-  const { templatePath, description } = getConfig(t);
+export default async ({ projectDirectory }: ArgvType) => {
+  const templatePath = path.join(Config.templatesPath, Config.templateDir);
   const destPath = path.join(process.cwd(), projectDirectory);
 
   if (fs.existsSync(destPath)) {
@@ -42,7 +24,7 @@ export default async ({ projectDirectory, t }: ArgvType) => {
   Metalsmith(process.cwd())
     .metadata({
       name: projectDirectory,
-      description,
+      description: Config.description,
     })
     .source(templatePath)
     .destination(destPath)
@@ -64,68 +46,36 @@ export default async ({ projectDirectory, t }: ArgvType) => {
         {
           name: 'description',
           message: 'description',
-          initial: description,
+          initial: Config.description,
           type: 'text',
-        },
-        {
-          name: 'platform',
-          message: 'platform',
-          type: 'select',
-          choices: Config.choices,
         },
       ]),
     )
-    .use(filterPlatform())
     .use(renderTemplateFiles())
-    .use(removeFile())
     .use(generatorOutputInfo())
     .build((err: Error) => {
       if (!err) {
-        const cd = chalk.cyan(` cd ${projectDirectory} && npm i`);
-        const platformList = chalk.yellow('ali, wechat, toutiao, xhs, web');
-        const oneCommandArray = [
-          {
-            command: chalk.cyan('npm run dev <platform>'),
-            description: `根据传入平台进行调试，支持参数为: ${platformList}`,
-          },
-          {
-            command: chalk.cyan('npm run dev ali'),
-            description: '调试阿里小程序',
-          },
-          {
-            command: chalk.cyan('npm run build <platform>'),
-            description: `根据传入平台构建小程序，支持参数为: ${platformList}`,
-          },
-          {
-            command: chalk.cyan('npm run build ali'),
-            description: '构建阿里小程序',
-          },
-        ];
-        const otherCommandArray = [
-          {
-            command: chalk.cyan('npm run dev'),
-            description: `调试${currentPlatformName}`,
-          },
-          {
-            command: chalk.cyan('npm run build'),
-            description: `构建${currentPlatformName}`,
-          },
-        ];
-        const newCommandArray = oneCommandArray.map((item) => {
-          return ` ${item.command} \t\n\t\n  ${item.description}`;
-        });
-        const newOtherCommandArray = otherCommandArray.map((item) => {
-          return ` ${item.command} \t\n\t\n  ${item.description}`;
-        });
-        const oneCommandInfo = `\t\n你可以进入 ${chalk.cyanBright(projectDirectory)} 执行以下命令: \t\n\t\n${cd}\t\n\t\n  进入项目目录并安装依赖\t\n\t\n${newCommandArray.join('\t\n\t\n')}`;
-        const otherCommandInfo = `\t\n你可以进入 ${chalk.cyanBright(projectDirectory)} 执行以下命令: \t\n\t\n${cd}\t\n\t\n  进入项目目录并安装依赖\t\n\t\n${newOtherCommandArray.join('\t\n\t\n')}`;
-        const currentCommandInfo =
-          currentPlatform === 'one' ? oneCommandInfo : otherCommandInfo;
+        const cd = chalk.cyan(`cd ${projectDirectory} && npm install`);
+        const devCommand = chalk.cyan('npm run dev');
+        const buildCommand = chalk.cyan('npm run build');
         console.log('\t');
-        console.log(`创建 ${chalk.cyan(currentPlatformName)} 成功！`);
-        console.log(currentCommandInfo);
+        console.log(chalk.green(`创建微信小程序项目成功！`));
+        console.log('\t');
         console.log(
-          '\t\n欲了解更多请查阅官方文档：https://remaxjs.wdchiphop.cn/',
+          `你可以进入 ${chalk.cyanBright(projectDirectory)} 执行以下命令:`,
+        );
+        console.log('\t');
+        console.log(`  ${cd}`);
+        console.log('    进入项目目录并安装依赖');
+        console.log('\t');
+        console.log(`  ${devCommand}`);
+        console.log('    启动开发模式（监听文件变化）');
+        console.log('\t');
+        console.log(`  ${buildCommand}`);
+        console.log('    构建生产版本');
+        console.log('\t');
+        console.log(
+          '然后使用微信开发者工具打开项目目录，dist 为编译输出目录。',
         );
       }
     });
@@ -133,47 +83,6 @@ export default async ({ projectDirectory, t }: ArgvType) => {
 
 const generatorOutputInfo = () => {
   return (_: any, metalsmith: any, done: () => void): void => {
-    const { platform } = metalsmith._metadata;
-    Config.choices.some((item: any) => {
-      if (item.value === platform) {
-        currentPlatformName = item.title;
-        currentPlatform = item.value;
-        return;
-      }
-    });
-    done();
-  };
-};
-
-const filterPlatform = () => {
-  return (_: any, metalsmith: any, done: () => void): void => {
-    const { platform } = metalsmith._metadata;
-    metalsmith._metadata.platformTitle =
-      platform[0].toUpperCase() + platform.slice(1).toLowerCase();
-    Config.choices.forEach((item: any) => {
-      metalsmith._metadata[item.value] = item.value === platform;
-    });
-    done();
-  };
-};
-
-const removeFile = () => {
-  const filesToRemove: Record<string, string[]> = {
-    'mini.project.json': ['wechat', 'toutiao', 'xhs'],
-    'project.config.json': ['ali'],
-  };
-
-  return (
-    files: Record<string, any>,
-    metalsmith: any,
-    done: () => void,
-  ): void => {
-    const { platform } = metalsmith._metadata;
-    for (const file of Object.keys(files)) {
-      if (filesToRemove[file]?.includes(platform)) {
-        delete files[file];
-      }
-    }
     done();
   };
 };
