@@ -1,8 +1,12 @@
 .idea
+.vscode
+
 node_modules
+
 .DS_Store
 lib
-*.log
-package-lock.json
-templates
+
+
+# demo 项目
 demo
+demo-ts
