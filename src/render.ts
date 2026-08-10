@@ -188,12 +188,53 @@ const ask = (list: PromptObject[]) => {
   };
 };
 
+const BINARY_EXTENSIONS = new Set([
+  '.png',
+  '.jpg',
+  '.jpeg',
+  '.gif',
+  '.ico',
+  '.webp',
+  '.bmp',
+  '.svg',
+  '.mp3',
+  '.mp4',
+  '.wav',
+  '.ogg',
+  '.avi',
+  '.mov',
+  '.woff',
+  '.woff2',
+  '.ttf',
+  '.eot',
+  '.otf',
+  '.pdf',
+  '.zip',
+  '.tar',
+  '.gz',
+  '.rar',
+  '.7z',
+  '.exe',
+  '.dll',
+  '.so',
+  '.dylib',
+  '.bin',
+]);
+
+function isBinaryFile(filepath: string): boolean {
+  const ext = path.extname(filepath).toLowerCase();
+  return BINARY_EXTENSIONS.has(ext);
+}
+
 const renderTemplateFiles = () => {
   return (files: any, metalsmith: any, done: () => void) => {
     const keys = Object.keys(files);
     const metalsmithMetadata = metalsmith.metadata();
     Promise.all(
       keys.map((file) => {
+        if (isBinaryFile(file)) {
+          return;
+        }
         const str = files[file].contents.toString();
         try {
           const res = ejs.render(str, metalsmithMetadata);

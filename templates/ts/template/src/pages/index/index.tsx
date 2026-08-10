@@ -1,12 +1,12 @@
-import { View, Text, Image } from '@rsmax/<%= platform %>';
-import styles from './index.css';
+import { View, Text, Image } from 'rsmax/<%= platform %>';
+import styles from './index.module.css';
 
 export default () => {
   return (
     <View className={styles.app}>
       <View className={styles.header}>
         <Image
-          src="https://gw.alipayobjects.com/mdn/rms_b5fcc5/afts/img/A*OGyZSI087zkAAAAAAAAAAABkARQnAQ"
+          src="/icon.png"
           className={styles.logo}
         />
         <View className={styles.text}>
