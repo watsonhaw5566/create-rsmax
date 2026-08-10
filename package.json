@@ -10,8 +10,8 @@
     "dev": "rslib build --watch",
     "format": "prettier --write .",
     "test": "rstest run",
-    "test-build-js": "node ./bin/create-rsmax demo",
-    "test-build-ts": "node ./bin/create-rsmax demo-ts -t",
+    "test-build-js": "rm -rf demo && node ./bin/create-rsmax demo -y -p wechat -c false",
+    "test-build-ts": "rm -rf demo-ts && node ./bin/create-rsmax demo-ts -t -y -p wechat -c false",
     "prepare": "pnpm run build && simple-git-hooks",
     "release": "pnpm run prepare && pnpm run publish"
   },

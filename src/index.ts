@@ -31,8 +31,35 @@ export function run(args: string[]) {
     .option('c', {
       alias: 'check',
       default: true,
-      describe: 'ignore version check',
+      describe: 'enable npm version check',
       type: 'boolean',
+    })
+    .option('y', {
+      alias: 'yes',
+      default: false,
+      describe: 'skip interactive prompts and use default values (for CI)',
+      type: 'boolean',
+    })
+    .option('n', {
+      alias: 'name',
+      describe: 'project name (defaults to project-directory)',
+      type: 'string',
+    })
+    .option('a', {
+      alias: 'author',
+      describe: 'project author (defaults to git user)',
+      type: 'string',
+    })
+    .option('d', {
+      alias: 'description',
+      describe: 'project description',
+      type: 'string',
+    })
+    .option('p', {
+      alias: 'platform',
+      describe:
+        'target platform: wechat | toutiao | ali | one (defaults to wechat when using -y)',
+      type: 'string',
     })
     .fail((msg: string, err: Error) => {
       if (err) throw err;

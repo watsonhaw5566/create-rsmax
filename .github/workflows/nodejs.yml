@@ -31,3 +31,5 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm build
           pnpm test
+          pnpm run test-build-js
+          pnpm run test-build-ts

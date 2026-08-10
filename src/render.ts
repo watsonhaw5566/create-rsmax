@@ -10,6 +10,12 @@ import * as Config from './config';
 
 export interface ArgvType extends Arguments {
   t: boolean;
+  c: boolean;
+  y: boolean;
+  n?: string;
+  a?: string;
+  d?: string;
+  p?: string;
   projectDirectory: string;
 }
 
@@ -30,50 +36,84 @@ function getConfig(isTS: boolean) {
   };
 }
 
-export default async ({ projectDirectory, t }: ArgvType) => {
-  const { templatePath, description } = getConfig(t);
+const DEFAULT_PLATFORM = 'wechat';
+
+function resolveDefaultValues(argv: ArgvType, fallbackDesc: string) {
+  const skipPrompt = !!argv.y;
+  return {
+    skipPrompt,
+    defaults: {
+      name: argv.n ?? projectDirectoryFromArgv(argv),
+      author: argv.a ?? (skipPrompt ? 'CI Bot' : user()),
+      description: argv.d ?? fallbackDesc,
+      platform: argv.p ?? (skipPrompt ? DEFAULT_PLATFORM : undefined),
+    },
+  };
+}
+
+function projectDirectoryFromArgv(argv: ArgvType): string {
+  return argv.projectDirectory;
+}
+
+export default async (argv: ArgvType) => {
+  const { projectDirectory, t } = argv;
+  const { templatePath, description: fallbackDesc } = getConfig(t);
   const destPath = path.join(process.cwd(), projectDirectory);
 
   if (fs.existsSync(destPath)) {
     console.log(chalk.red('此项目已存在，请变更名字后重试'));
-    return;
+    process.exit(1);
+  }
+
+  const { skipPrompt, defaults } = resolveDefaultValues(argv, fallbackDesc);
+
+  if (skipPrompt) {
+    console.log(
+      chalk.gray(
+        `[CI mode] Using defaults: name=${defaults.name}, platform=${defaults.platform}`,
+      ),
+    );
   }
 
   Metalsmith(process.cwd())
     .metadata({
       name: projectDirectory,
-      description,
+      description: fallbackDesc,
     })
     .source(templatePath)
     .destination(destPath)
     .clean(false)
     .use(
-      ask([
-        {
-          name: 'name',
-          message: 'name',
-          initial: projectDirectory,
-          type: 'text',
-        },
-        {
-          name: 'author',
-          message: 'author',
-          initial: user(),
-          type: 'text',
-        },
-        {
-          name: 'description',
-          message: 'description',
-          initial: description,
-          type: 'text',
-        },
-        {
-          name: 'platform',
-          message: 'platform',
-          type: 'select',
-          choices: Config.choices,
-        },
-      ]),
+      ask(
+        [
+          {
+            name: 'name',
+            message: 'name',
+            initial: projectDirectory,
+            type: 'text',
+          },
+          {
+            name: 'author',
+            message: 'author',
+            initial: user(),
+            type: 'text',
+          },
+          {
+            name: 'description',
+            message: 'description',
+            initial: fallbackDesc,
+            type: 'text',
+          },
+          {
+            name: 'platform',
+            message: 'platform',
+            type: 'select',
+            choices: Config.choices,
+          },
+        ],
+        skipPrompt,
+        defaults,
+      ),
     )
     .use(filterPlatform())
     .use(renderTemplateFiles())
@@ -178,11 +218,37 @@ const removeFile = () => {
   };
 };
 
-const ask = (list: PromptObject[]) => {
+const ask = (
+  list: PromptObject[],
+  skipPrompt: boolean,
+  defaults: Record<string, any>,
+) => {
   return async (_: any, metalsmith: any, done: any) => {
-    const data = await prompts(list);
+    const metadata = metalsmith.metadata();
+    Object.keys(defaults).forEach((k) => {
+      if (defaults[k] !== undefined) {
+        metadata[k] = defaults[k];
+      }
+    });
+
+    if (skipPrompt) {
+      done();
+      return;
+    }
+
+    const filteredList = list.filter((p) => {
+      const promptName = (p as any).name;
+      return defaults[promptName] === undefined;
+    });
+
+    if (filteredList.length === 0) {
+      done();
+      return;
+    }
+
+    const data = await prompts(filteredList);
     Object.keys(data).forEach((k) => {
-      metalsmith.metadata()[k] = data[k];
+      metadata[k] = data[k];
     });
     done();
   };
