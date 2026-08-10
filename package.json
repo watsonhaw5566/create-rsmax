@@ -10,8 +10,8 @@
     "dev": "rslib build --watch",
     "format": "prettier --write .",
     "test": "rstest run",
-    "test-build-js": "node ./bin/create-rsmax demo ali",
-    "test-build-ts": "node ./bin/create-rsmax demo -t",
+    "test-build-js": "node ./bin/create-rsmax demo",
+    "test-build-ts": "node ./bin/create-rsmax demo-ts -t",
     "prepare": "pnpm run build && simple-git-hooks",
     "release": "pnpm run prepare && pnpm run publish"
   },
@@ -62,6 +62,6 @@
     "pre-commit": "pnpm run format && pnpm run test && pnpm run build"
   },
   "engines": {
-    "node": ">= 20.19"
+    "node": ">= 20"
   }
 }
