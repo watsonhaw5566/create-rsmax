@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '版本号或升级类型 (patch / minor / major / 1.2.0)'
+        required: true
+        default: 'patch'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: 使用 Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
+      - name: 升级 npm 到支持可信发布的版本
+        run: npm install -g npm@latest
+
+      - name: 配置 Git 用户
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 构建与测试
+        run: |
+          pnpm build
+          pnpm test
+          pnpm run test-build-js
+          pnpm run test-build-ts
+
+      - name: 升级版本号
+        id: bump
+        run: |
+          NEW_VERSION=$(npm version ${{ inputs.version }} --no-git-tag-version)
+          echo "version=${NEW_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: 提交版本变更并推送 tag
+        run: |
+          git add package.json
+          git commit -m "chore: release ${{ steps.bump.outputs.version }}"
+          git tag ${{ steps.bump.outputs.version }}
+          git push origin HEAD --follow-tags
+
+      - name: 发布到 npm（可信发布 / OIDC）
+        run: npm publish --provenance --access public
+
+      - name: 创建 GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.bump.outputs.version }}
+          generate_release_notes: true

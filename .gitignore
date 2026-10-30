@@ -1,7 +1,15 @@
 .idea
+.vscode
+
 node_modules
+
 .DS_Store
 lib
-*.log
-package-lock.json
+
+
+# demo 项目
 demo
+demo-ts
+
+# docs
+rsmax-docs
