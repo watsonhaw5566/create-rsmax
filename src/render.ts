@@ -17,7 +17,7 @@ export interface ArgvType {
 }
 
 function resolveDefaultValues(argv: ArgvType, fallbackDesc: string) {
-  const skipPrompt = !!argv.y;
+  const skipPrompt = argv.y;
   return {
     skipPrompt,
     defaults: {

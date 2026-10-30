@@ -1,8 +1,31 @@
-import { useState } from '@rsmax/runtime';
+import { useState, useEffect } from '@rsmax/runtime';
 import styles from './index.module.css';
+
+const THEMES = {
+  dark: {
+    frontColor: '#ffffff',
+    backgroundColor: '#282c34',
+  },
+  light: {
+    frontColor: '#000000',
+    backgroundColor: '#ffffff',
+  },
+};
+
+function applyNavBar(isDark) {
+  const theme = isDark ? THEMES.dark : THEMES.light;
+  wx.setNavigationBarColor({
+    frontColor: theme.frontColor,
+    backgroundColor: theme.backgroundColor,
+  });
+}
 
 export default function Index() {
   const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    applyNavBar(isDark);
+  }, [isDark]);
 
   const toggleTheme = () => {
     setIsDark(d => !d);

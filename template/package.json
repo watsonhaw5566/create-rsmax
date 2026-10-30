@@ -11,6 +11,9 @@
     "clean": "rsmax clean dist"
   },
   "dependencies": {
+    "@rsmax/runtime": "^2.0.0-beta.5"
+  },
+  "devDependencies": {
     "rsmax": "^2.0.0-beta.5"
   },
   "engines": {
