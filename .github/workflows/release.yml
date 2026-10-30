@@ -29,11 +29,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
 
-      - name: 配置 Git 用户
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
 
@@ -44,18 +39,10 @@ jobs:
           pnpm run test-build
 
       - name: 设置版本号（取自 Release tag）
-        id: version
         run: |
           TAG_NAME="${{ github.event.release.tag_name }}"
           VERSION="${TAG_NAME#v}"
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
           npm version "${VERSION}" --no-git-tag-version
-
-      - name: 提交版本变更并推送
-        run: |
-          git add package.json
-          git commit -m "chore: release ${{ steps.version.outputs.version }}"
-          git push origin HEAD:${{ github.event.release.target_commitish }}
 
       - name: 发布到 npm（可信发布 / OIDC）
         run: npm publish --provenance --access public
