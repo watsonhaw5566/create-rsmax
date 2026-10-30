@@ -1,5 +1,4 @@
 import path from 'path';
 
-export const description = 'Rsmax Project';
-export const templatesPath = path.join(__dirname, '..', 'templates');
-export const templateDir = 'template';
+export const description = 'Rsmax 微信小程序项目';
+export const templatePath = path.join(__dirname, '..', 'template');

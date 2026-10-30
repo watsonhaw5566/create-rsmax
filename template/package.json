@@ -1,10 +1,8 @@
 {
   "name": "<%= name %>",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "<%- description %>",
-  "main": "index.js",
-  "keywords": [],
   "author": "<%- author %>",
   "license": "MIT",
   "scripts": {
@@ -13,6 +11,9 @@
     "clean": "rsmax clean dist"
   },
   "dependencies": {
-    "rsmax": "^2.0.0"
+    "rsmax": "^2.0.0-beta.5"
+  },
+  "engines": {
+    "node": ">= 20"
   }
 }
