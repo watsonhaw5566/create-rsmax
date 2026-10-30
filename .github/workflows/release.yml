@@ -41,8 +41,7 @@ jobs:
         run: |
           pnpm build
           pnpm test
-          pnpm run test-build-js
-          pnpm run test-build-ts
+          pnpm run test-build
 
       - name: 设置版本号（取自 Release tag）
         id: version
