@@ -1,7 +1,7 @@
 import { cac } from 'cac';
 import chalk from 'chalk';
 import { checkCurrentRepoVersion } from './check-version';
-import render from './render';
+import render, { ArgvType } from './render';
 
 const { version, name: scriptName } = require('../package.json');
 const placeholder = 'project-directory';
@@ -10,7 +10,20 @@ export function run(args: string[]) {
   const cli = cac(scriptName);
 
   cli.usage(`<${placeholder}> [options]`);
-  cli.option('-c, --check', 'ignore version check', { default: true });
+  cli.option('-c, --check', 'enable npm version check', { default: true });
+  cli.option(
+    '-y, --yes',
+    'skip interactive prompts and use default values (for CI)',
+    {
+      default: false,
+    },
+  );
+  cli.option(
+    '-n, --name <name>',
+    'project name (defaults to project-directory)',
+  );
+  cli.option('-a, --author <author>', 'project author (defaults to git user)');
+  cli.option('-d, --description <description>', 'project description');
   cli.help();
   cli.version(version);
 
@@ -30,7 +43,14 @@ export function run(args: string[]) {
     process.exit(1);
   }
 
-  create(projectDirectory, parsed.options as { check: boolean });
+  create({
+    projectDirectory,
+    c: parsed.options.check,
+    y: parsed.options.yes,
+    n: parsed.options.name,
+    a: parsed.options.author,
+    d: parsed.options.description,
+  } as ArgvType);
 }
 
 function printMissingDirError() {
@@ -47,12 +67,12 @@ function printMissingDirError() {
   );
 }
 
-function create(projectDirectory: string, options: { check: boolean }) {
-  if (options.check) {
+function create(argv: ArgvType) {
+  if (argv.c) {
     try {
       checkCurrentRepoVersion(scriptName);
     } catch {}
   }
 
-  render({ projectDirectory, check: options.check });
+  render(argv);
 }

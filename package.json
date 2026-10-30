@@ -35,7 +35,7 @@
   "files": [
     "lib",
     "bin",
-    "templates"
+    "template"
   ],
   "homepage": "https://github.com/watsonhaw5566/create-rsmax#readme",
   "dependencies": {
